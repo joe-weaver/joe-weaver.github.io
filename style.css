@@ -1,0 +1,294 @@
+:root {
+    --black: black;
+    --black-lighter: rgb(0, 0, 0, 0.6);
+    --blue: rgb(50, 121, 228);
+}
+
+/* Some default body styling to get rid of borders */
+body {
+    margin: 0px;
+    font-family: 'Roboto', sans-serif;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+}
+
+code {
+    font-family: 'Roboto Mono', monospace;
+}
+
+/* Custom code class to make things look like code in things other than code tags */
+.code {
+    font-family: 'Roboto Mono', monospace;
+}
+
+/* ########## NAVBAR AND NAVITEM STYLING ########## */
+/* The main navbar of the page */
+#navbar {
+    /* Sticky Navbar */
+    position: sticky;
+    top: 0px;
+    z-index: 20;
+
+    /* Flex display in a row to contain nav-items */
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+
+    /* Color */
+    background-color: rgb(139, 11, 11);
+    color: white;
+
+    /* Size */
+    height: 8vh;
+
+    /* Spacing */
+    padding-left: 100px;
+
+    /* Font and text */
+    font-size: 2rem;    
+}
+
+.nav-item {
+    /* Take up 100% of the height for proper highlighting */
+    height: 100%;
+
+    /* Display text w/ vertical center align */
+    display: flex;
+    align-items: center;
+
+    /* Text */
+    color: white;
+    text-decoration: none;
+}
+
+.nav-item:hover {
+    cursor: pointer;
+}
+
+/* Pad to the left of a nav-item after a nav-item */
+.nav-item + .nav-item {
+    margin-left: 50px;
+}
+
+/* ######################################## */
+
+/* ########## PAGE CONTENT STYLING ########## */
+#page {
+    /* Display the page sidebar next to the content */
+    position: relative;
+    display: flex;
+    flex-direction: row;
+    
+    flex-grow: 1;
+}
+
+/* ######################################## */
+
+/* ########## SIDEBAR AND SIDEBAR ITEM STYLING ########## */
+#sidebar {
+    /* Color */
+    background-color: whitesmoke;
+
+    /* Border */
+    border-style: solid;
+    border-width: 0px 1px 0px 0px;
+    border-color: rgb(187, 187, 187);
+
+    /* Spacing */
+    padding-top: 20px;
+    min-width: 15vw;
+    height: 92vh;
+
+    position: sticky;
+    top: 8vh;
+}
+
+.folder {
+    margin-left: 20px;
+    cursor: pointer;
+    user-select: none;
+}
+
+.folder.closed .folder-name::before {
+    content: "\1433";
+    padding-right: 10px;
+}
+
+.folder .folder-name::before {
+    content: "\142f";
+    padding-right: 10px;
+}
+
+.folder .file {
+    margin-left: 30px;
+}
+
+.folder.closed .file {
+    display: none;
+}
+
+.folder.closed .folder {
+    display: none;
+}
+
+.folder .folder {
+    margin-left: 30px;
+}
+
+.file {
+    /* Override the default behavior of anchor tags */
+    display: block;
+    color: var(--black);
+    text-decoration: none;
+
+    /* Cursor behavior */
+    cursor: pointer;
+    user-select: none;
+
+    margin-left: 20px;
+}
+
+/* Give some indication of hovering over a clickable file */
+.file:hover {
+    color: var(--black-lighter);
+}
+
+/* ######################################## */
+
+/* ########## DOCS CONTENT ########## */
+#content {
+    /* padding: 20px 50px; */
+    max-width: 85vw;
+    overflow: auto;
+}
+
+.members {
+    margin-left: 30px;
+}
+
+.member-description {
+    margin-left: 30px;
+}
+
+.functions {
+    margin-left: 30px;
+}
+
+.function-description {
+    margin-left: 30px;
+}
+
+.params {
+    margin-left: 30px;
+}
+
+.param-table {
+    margin-left: 30px;
+
+    /* Table style */
+    border-style: solid;
+    border-width: 1px;
+    border-color: var(--black-lighter);
+    border-spacing: 0px;
+}
+
+.param-table th {
+    text-align: left;
+    background-color: var(--blue);
+    color: white;
+    
+}
+
+.param-table th, .param-table td {
+    padding: 5px;
+    padding-right: 30px;
+}
+
+.param-table tr:nth-of-type(2n) {
+    background-color: whitesmoke;
+}
+
+.param-table tr:nth-of-type(2n) {
+    background-color: rgb(233, 233, 233);
+}
+
+.func-return {
+    margin-left: 30px;
+}
+/* ######################################## */
+
+/* ########## CLASS CONTENT ########## */
+
+#class-container {
+    width: 80vw;
+    height: 100%;
+    position: relative;
+    top: 0px;
+    left: 0px;
+}
+
+
+#class-canvas {
+    background-color: white;
+
+    /* Size and position */
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    top: 0px;
+    left: 0px;
+}
+
+.uml-box {
+    /* Size and position */
+    position: absolute;
+    top: 0px;       /* Adjustable property */
+    left: 0px;      /* Adjustable property */
+    width: 200px;   /* Adjustable property */
+
+    /* Border */
+    border-style: solid;
+    border-width: 1px;
+    border-color: black;
+
+    /* Text */
+    font-size: 12px;
+
+    /* Color */
+    background-color: whitesmoke;
+}
+
+.uml-header {
+    /* Size */
+    width: 100%;
+
+    /* Border */
+    border-style: solid;
+    border-width: 1px;
+    border-color: black;
+
+    /* Font */
+    font-size: 16px;
+    text-align: center;
+}
+
+.uml-members {
+    /* Size */
+    width: 100%;
+
+    /* Border */
+    border-style: solid;
+    border-width: 1px;
+    border-color: black;
+}
+
+.uml-functions {
+    /* Size */
+    width: 100%;    
+
+    /* Border */
+    border-style: solid;
+    border-width: 1px;
+    border-color: black;
+}

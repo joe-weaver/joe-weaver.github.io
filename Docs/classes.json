@@ -1,0 +1,1800 @@
+[
+    {
+        "name": "GameNode",
+        "sidebar": "gamenode",
+        "size": [
+            2000,
+            3200
+        ],
+        "data": [
+            {
+                "name": "Positioned",
+                "type": "interface",
+                "extends": null,
+                "implements": [],
+                "related": [],
+                "position": [
+                    50,
+                    50
+                ],
+                "width": 300,
+                "height": -1,
+                "element": null
+            },
+            {
+                "name": "Unique",
+                "type": "interface",
+                "extends": null,
+                "implements": [],
+                "related": [],
+                "position": [
+                    400,
+                    50
+                ],
+                "width": 300,
+                "height": -1,
+                "element": null
+            },
+            {
+                "name": "Actor",
+                "linkTo": {
+                    "text": "Go to AI class diagram",
+                    "destination": "ai"
+                },
+                "type": "interface",
+                "extends": null,
+                "implements": [],
+                "related": [],
+                "position": [
+                    750,
+                    50
+                ],
+                "width": 300,
+                "height": -1,
+                "element": null
+            },
+            {
+                "name": "Physical",
+                "type": "interface",
+                "extends": null,
+                "implements": [],
+                "related": [],
+                "position": [
+                    1100,
+                    50
+                ],
+                "width": 300,
+                "height": -1,
+                "element": null
+            },
+            {
+                "name": "GameNode",
+                "type": "class",
+                "extends": null,
+                "implements": [
+                    {
+                        "name": "Positioned",
+                        "startFactor": 0,
+                        "endFactor": 1,
+                        "startFace": "top",
+                        "endFace": "bottom",
+                        "startAnnotation": "",
+                        "endAnnotation": ""
+                    },
+                    {
+                        "name": "Unique",
+                        "startFactor": 0.33,
+                        "endFactor": 0.5,
+                        "startFace": "top",
+                        "endFace": "bottom",
+                        "startAnnotation": "",
+                        "endAnnotation": ""
+                    },
+                    {
+                        "name": "Actor",
+                        "startFactor": 0.66,
+                        "endFactor": 0.5,
+                        "startFace": "top",
+                        "endFace": "bottom",
+                        "startAnnotation": "",
+                        "endAnnotation": ""
+                    },
+                    {
+                        "name": "Physical",
+                        "startFactor": 1,
+                        "endFactor": 0,
+                        "startFace": "top",
+                        "endFace": "bottom",
+                        "startAnnotation": "",
+                        "endAnnotation": ""
+                    }
+                ],
+                "related": [
+                    {
+                        "name": "Scene",
+                        "startFactor": 0.5,
+                        "endFactor": 0.5,
+                        "startFace": "right",
+                        "endFace": "left",
+                        "startAnnotation": "n",
+                        "endAnnotation": "1"
+                    }
+                ],
+                "position": [
+                    550,
+                    600
+                ],
+                "width": 400,
+                "height": -1,
+                "element": null
+            },
+            {
+                "name": "Scene",
+                "linkTo": {
+                    "text": "Go to Scene class diagram",
+                    "destination": "scene"
+                },
+                "type": "class",
+                "extends": null,
+                "implements": [],
+                "related": [],
+                "position": [
+                    1500,
+                    600
+                ],
+                "width": 400,
+                "height": -1,
+                "element": null
+            },
+            {
+                "name": "Region",
+                "type": "interface",
+                "extends": null,
+                "implements": [],
+                "related": [],
+                "position": [
+                    50,
+                    800
+                ],
+                "width": 400,
+                "height": -1,
+                "element": null
+            },
+            {
+                "name": "CanvasNode",
+                "type": "class",
+                "extends": {
+                    "name": "GameNode",
+                    "startFactor": 0.5,
+                    "endFactor": 0.5,
+                    "startFace": "top",
+                    "endFace": "bottom"
+                },
+                "implements": [{
+                    "name": "Region",
+                    "startFactor": 0.5,
+                    "endFactor": 1,
+                    "startFace": "left",
+                    "endFace": "bottom"
+                }],
+                "related": [],
+                "position": [
+                    550,
+                    1000
+                ],
+                "width": 400,
+                "height": -1,
+                "element": null
+            },
+            {
+                "name": "Graphic",
+                "type": "class",
+                "extends": {
+                    "name": "CanvasNode",
+                    "startFactor": 0.5,
+                    "endFactor": 0,
+                    "startFace": "top",
+                    "endFace": "bottom"
+                },
+                "implements": [],
+                "related": [],
+                "position": [
+                    50,
+                    1200
+                ],
+                "width": 300,
+                "height": -1,
+                "element": null
+            },
+            {
+                "name": "Tilemap",
+                "type": "class",
+                "extends": {
+                    "name": "CanvasNode",
+                    "startFactor": 0.5,
+                    "endFactor": 0.33,
+                    "startFace": "top",
+                    "endFace": "bottom"
+                },
+                "implements": [],
+                "related": [],
+                "position": [
+                    400,
+                    1200
+                ],
+                "width": 300,
+                "height": -1,
+                "element": null
+            },
+            {
+                "name": "Sprite",
+                "type": "class",
+                "extends": {
+                    "name": "CanvasNode",
+                    "startFactor": 0.5,
+                    "endFactor": 0.66,
+                    "startFace": "top",
+                    "endFace": "bottom"
+                },
+                "implements": [],
+                "related": [],
+                "position": [
+                    750,
+                    1200
+                ],
+                "width": 300,
+                "height": -1,
+                "element": null
+            },
+            {
+                "name": "UIElement",
+                "type": "class",
+                "extends": {
+                    "name": "CanvasNode",
+                    "startFactor": 0.5,
+                    "endFactor": 1,
+                    "startFace": "top",
+                    "endFace": "bottom"
+                },
+                "implements": [],
+                "related": [],
+                "position": [
+                    1100,
+                    1200
+                ],
+                "width": 300,
+                "height": -1,
+                "element": null
+            },
+            {
+                "name": "Rect",
+                "type": "class",
+                "extends": {
+                    "name": "Graphic",
+                    "startFactor": 0.5,
+                    "endFactor": 0.33,
+                    "startFace": "top",
+                    "endFace": "bottom"
+                },
+                "implements": [],
+                "related": [],
+                "position": [
+                    50,
+                    1900
+                ],
+                "width": 300,
+                "height": -1,
+                "element": null
+            },
+            {
+                "name": "Point",
+                "type": "class",
+                "extends": {
+                    "name": "Graphic",
+                    "startFactor": 0,
+                    "endFactor": 0.66,
+                    "startFace": "top",
+                    "endFace": "bottom"
+                },
+                "implements": [],
+                "related": [],
+                "position": [
+                    400,
+                    1900
+                ],
+                "width": 300,
+                "height": -1,
+                "element": null
+            },
+            {
+                "name": "OrthogonalTilemap",
+                "type": "class",
+                "extends": {
+                    "name": "Tilemap",
+                    "startFactor": 0.5,
+                    "endFactor": 0.5,
+                    "startFace": "top",
+                    "endFace": "bottom"
+                },
+                "implements": [],
+                "related": [],
+                "position": [
+                    400,
+                    1600
+                ],
+                "width": 300,
+                "height": -1,
+                "element": null
+            },
+            {
+                "name": "AnimatedSprite",
+                "type": "class",
+                "extends": {
+                    "name": "Sprite",
+                    "startFactor": 0.5,
+                    "endFactor": 0.5,
+                    "startFace": "top",
+                    "endFace": "bottom"
+                },
+                "implements": [],
+                "related": [],
+                "position": [
+                    750,
+                    1400
+                ],
+                "width": 300,
+                "height": -1,
+                "element": null
+            },
+            {
+                "name": "Label",
+                "type": "class",
+                "extends": {
+                    "name": "UIElement",
+                    "startFactor": 0.5,
+                    "endFactor": 0.2,
+                    "startFace": "top",
+                    "endFace": "bottom"
+                },
+                "implements": [],
+                "related": [],
+                "position": [
+                    750,
+                    1600
+                ],
+                "width": 300,
+                "height": -1,
+                "element": null
+            },
+            {
+                "name": "Slider",
+                "type": "class",
+                "extends": {
+                    "name": "UIElement",
+                    "startFactor": 0.5,
+                    "endFactor": 0.5,
+                    "startFace": "top",
+                    "endFace": "bottom"
+                },
+                "implements": [],
+                "related": [],
+                "position": [
+                    1100,
+                    1600
+                ],
+                "width": 300,
+                "height": -1,
+                "element": null
+            },
+            {
+                "name": "Button",
+                "type": "class",
+                "extends": {
+                    "name": "Label",
+                    "startFactor": 0.5,
+                    "endFactor": 0.33,
+                    "startFace": "top",
+                    "endFace": "bottom"
+                },
+                "implements": [],
+                "related": [],
+                "position": [
+                    575,
+                    2000
+                ],
+                "width": 300,
+                "height": -1,
+                "element": null
+            },
+            {
+                "name": "TextInput",
+                "type": "class",
+                "extends": {
+                    "name": "Label",
+                    "startFactor": 0.5,
+                    "endFactor": 0.66,
+                    "startFace": "top",
+                    "endFace": "bottom"
+                },
+                "implements": [],
+                "related": [],
+                "position": [
+                    925,
+                    2000
+                ],
+                "width": 300,
+                "height": -1,
+                "element": null
+            }
+        ]
+    },
+    {
+        "name": "Scene",
+        "sidebar": "scene",
+        "size": [
+            2400,
+            3200
+        ],
+        "data": [
+            {
+                "name": "GameNode",
+                "linkTo": {
+                    "text": "Go to GameNode class diagram",
+                    "destination": "Nodes"
+                },
+                "type": "class",
+                "extends": null,
+                "implements": [],
+                "related": [
+                    {
+                        "name": "Layer",
+                        "startFactor": 0.5,
+                        "endFactor": 0.5,
+                        "startFace": "right",
+                        "endFace": "left",
+                        "startAnnotation": "n",
+                        "endAnnotation": "1"
+                    },
+                    {
+                        "name": "Scene",
+                        "startFactor": 0.5,
+                        "endFactor": 0.5,
+                        "startFace": "right",
+                        "endFace": "left",
+                        "startAnnotation": "n",
+                        "endAnnotation": "1"
+                    }
+                ],
+                "position": [
+                    50,
+                    800
+                ],
+                "width": 400,
+                "height": -1,
+                "element": null
+            },
+            {
+                "name": "Layer",
+                "type": "class",
+                "extends": null,
+                "implements": [],
+                "related": [
+                    {
+                        "name": "Scene",
+                        "startFactor": 0.5,
+                        "endFactor": 0.33,
+                        "startFace": "right",
+                        "endFace": "left",
+                        "startAnnotation": "n",
+                        "endAnnotation": "1"
+                    }
+                ],
+                "position": [
+                    550,
+                    400
+                ],
+                "width": 400,
+                "height": -1,
+                "element": null
+            },
+            {
+                "name": "Scene",
+                "type": "class",
+                "extends": null,
+                "implements": [],
+                "related": [
+                    {
+                        "name": "SceneManager",
+                        "startFactor": 0.5,
+                        "endFactor": 0.5,
+                        "startFace": "top",
+                        "endFace": "bottom",
+                        "startAnnotation": "1",
+                        "endAnnotation": "1"
+                    }
+                ],
+                "position": [
+                    1250,
+                    1000
+                ],
+                "width": 400,
+                "height": -1,
+                "element": null
+            },
+            {
+                "name": "SceneManager",
+                "type": "class",
+                "extends": null,
+                "implements": [],
+                "related": [
+                    {
+                        "name": "GameLoop",
+                        "startFactor": 0.5,
+                        "endFactor": 0.5,
+                        "startFace": "top",
+                        "endFace": "bottom",
+                        "startAnnotation": "1",
+                        "endAnnotation": "1"
+                    }
+                ],
+                "position": [
+                    1250,
+                    600
+                ],
+                "width": 400,
+                "height": -1,
+                "element": null
+            },
+            {
+                "name": "GameLoop",
+                "type": "class",
+                "extends": null,
+                "implements": [],
+                "related": [],
+                "position": [
+                    1250,
+                    50
+                ],
+                "width": 400,
+                "height": -1,
+                "element": null
+            },
+            {
+                "name": "ResourceManager",
+                "type": "class",
+                "extends": null,
+                "implements": [],
+                "related": [
+                    {
+                        "name": "Scene",
+                        "startFactor": 0.5,
+                        "endFactor": 0.33,
+                        "startFace": "left",
+                        "endFace": "right",
+                        "startAnnotation": "",
+                        "endAnnotation": "load"
+                    }
+                ],
+                "position": [
+                    1800,
+                    700
+                ],
+                "width": 400,
+                "height": -1,
+                "element": null
+            },
+            {
+                "name": "FactoryManager",
+                "type": "class",
+                "extends": null,
+                "implements": [],
+                "related": [
+                    {
+                        "name": "Scene",
+                        "startFactor": 0.5,
+                        "endFactor": 0.66,
+                        "startFace": "left",
+                        "endFace": "right",
+                        "startAnnotation": "",
+                        "endAnnotation": "add"
+                    }
+                ],
+                "position": [
+                    1800,
+                    1600
+                ],
+                "width": 400,
+                "height": -1,
+                "element": null
+            },
+            {
+                "name": "SceneGraph",
+                "type": "class",
+                "extends": null,
+                "implements": [],
+                "related": [
+                    {
+                        "name": "Scene",
+                        "startFactor": 1,
+                        "endFactor": 0,
+                        "startFace": "top",
+                        "endFace": "bottom",
+                        "startAnnotation": "",
+                        "endAnnotation": ""
+                    }
+                ],
+                "position": [
+                    550,
+                    1900
+                ],
+                "width": 400,
+                "height": -1,
+                "element": null
+            },
+            {
+                "name": "AIManager",
+                "type": "class",
+                "extends": null,
+                "implements": [],
+                "related": [
+                    {
+                        "name": "Scene",
+                        "startFactor": 0.5,
+                        "endFactor": 0.33,
+                        "startFace": "top",
+                        "endFace": "bottom",
+                        "startAnnotation": "",
+                        "endAnnotation": ""
+                    }
+                ],
+                "position": [
+                    1000,
+                    1900
+                ],
+                "width": 400,
+                "height": -1,
+                "element": null
+            },
+            {
+                "name": "PhysicsManager",
+                "type": "class",
+                "extends": null,
+                "implements": [],
+                "related": [
+                    {
+                        "name": "Scene",
+                        "startFactor": 0.5,
+                        "endFactor": 0.66,
+                        "startFace": "top",
+                        "endFace": "bottom",
+                        "startAnnotation": "",
+                        "endAnnotation": ""
+                    }
+                ],
+                "position": [
+                    1450,
+                    1900
+                ],
+                "width": 400,
+                "height": -1,
+                "element": null
+            },
+            {
+                "name": "NavigationManager",
+                "type": "class",
+                "extends": null,
+                "implements": [],
+                "related": [
+                    {
+                        "name": "Scene",
+                        "startFactor": 0,
+                        "endFactor": 1,
+                        "startFace": "top",
+                        "endFace": "bottom",
+                        "startAnnotation": "",
+                        "endAnnotation": ""
+                    }
+                ],
+                "position": [
+                    1900,
+                    1900
+                ],
+                "width": 400,
+                "height": -1,
+                "element": null
+            },
+            {
+                "name": "TestPhysicsManager",
+                "type": "class",
+                "extends": {
+                    "name": "PhysicsManager",
+                    "startFactor": 0.5,
+                    "endFactor": 0.5,
+                    "startFace": "top",
+                    "endFace": "bottom",
+                    "startAnnotation": "",
+                    "endAnnotation": ""
+                },
+                "implements": [],
+                "related": [],
+                "position": [
+                    1450,
+                    2300
+                ],
+                "width": 400,
+                "height": -1,
+                "element": null
+            },
+            {
+                "name": "SceneGraphArray",
+                "type": "class",
+                "extends": {
+                    "name": "SceneGraph",
+                    "startFactor": 0.5,
+                    "endFactor": 0.33,
+                    "startFace": "top",
+                    "endFace": "bottom",
+                    "startAnnotation": "",
+                    "endAnnotation": ""
+                },
+                "implements": [],
+                "related": [],
+                "position": [
+                    325,
+                    2300
+                ],
+                "width": 400,
+                "height": -1,
+                "element": null
+            },
+            {
+                "name": "SceneGraphQuadTree",
+                "type": "class",
+                "extends": {
+                    "name": "SceneGraph",
+                    "startFactor": 0.5,
+                    "endFactor": 0.66,
+                    "startFace": "top",
+                    "endFace": "bottom",
+                    "startAnnotation": "",
+                    "endAnnotation": ""
+                },
+                "implements": [],
+                "related": [],
+                "position": [
+                    775,
+                    2300
+                ],
+                "width": 400,
+                "height": -1,
+                "element": null
+            }
+        ]
+    },
+    {
+        "name": "AI",
+        "sidebar": "ai",
+        "size": [
+            2400,
+            3200
+        ],
+        "data": [
+            {
+                "name": "Scene",
+                "linkTo": {
+                    "text": "Go to Scene class diagram",
+                    "destination": "scene"
+                },
+                "type": "class",
+                "extends": null,
+                "implements": [],
+                "related": [],
+                "position": [
+                    1300,
+                    50
+                ],
+                "width": 400,
+                "height": -1,
+                "element": null
+            },
+            {
+                "name": "AIManager",
+                "type": "class",
+                "extends": null,
+                "implements": [],
+                "related": [
+                    {
+                        "name": "Scene",
+                        "startFactor": 0.5,
+                        "endFactor": 0.5,
+                        "startFace": "right",
+                        "endFace": "left",
+                        "startAnnotation": "",
+                        "endAnnotation": ""
+                    }
+                ],
+                "position": [
+                    600,
+                    450
+                ],
+                "width": 400,
+                "height": -1,
+                "element": null
+            },
+            {
+                "name": "Actor",
+                "type": "interface",
+                "extends": null,
+                "implements": [],
+                "related": [
+                    {
+                        "name": "AIManager",
+                        "startFactor": 0.5,
+                        "endFactor": 0.5,
+                        "startFace": "top",
+                        "endFace": "bottom",
+                        "startAnnotation": "n",
+                        "endAnnotation": "1"
+                    }
+                ],
+                "position": [
+                    600,
+                    750
+                ],
+                "width": 400,
+                "height": -1,
+                "element": null
+            },
+            {
+                "name": "GameNode",
+                "linkTo": {
+                    "text": "Go to GameNode class diagram",
+                    "destination": "Nodes"
+                },
+                "type": "interface",
+                "extends": null,
+                "implements": [{
+                    "name": "Actor",
+                    "startFactor": 0.33,
+                    "endFactor": 0.5,
+                    "startFace": "left",
+                    "endFace": "right",
+                    "startAnnotation": "n",
+                    "endAnnotation": "1"
+                }],
+                "related": [],
+                "position": [
+                    1300,
+                    950
+                ],
+                "width": 400,
+                "height": -1,
+                "element": null
+            },
+            {
+                "name": "AI",
+                "type": "interface",
+                "extends": null,
+                "implements": [],
+                "related": [
+                    {
+                        "name": "Actor",
+                        "startFactor": 0.5,
+                        "endFactor": 0.5,
+                        "startFace": "top",
+                        "endFace": "bottom",
+                        "startAnnotation": "",
+                        "endAnnotation": ""
+                    }
+                ],
+                "position": [
+                    600,
+                    1000
+                ],
+                "width": 400,
+                "height": -1,
+                "element": null
+            },
+            {
+                "name": "StateMachineAI",
+                "type": "class",
+                "extends": {
+                    "name": "StateMachine",
+                    "startFactor": 0,
+                    "endFactor": 1,
+                    "startFace": "top",
+                    "endFace": "bottom",
+                    "startAnnotation": "",
+                    "endAnnotation": ""
+                },
+                "implements": [
+                    {
+                    "name": "AI",
+                    "startFactor": 0.5,
+                    "endFactor": 0.5,
+                    "startFace": "top",
+                    "endFace": "bottom",
+                    "startAnnotation": "",
+                    "endAnnotation": ""
+                }],
+                "related": [
+                    {
+                        "name": "GameNode",
+                        "startFactor": 0.5,
+                        "endFactor": 0.66,
+                        "startFace": "right",
+                        "endFace": "left",
+                        "startAnnotation": "",
+                        "endAnnotation": ""
+                    }
+                ],
+                "position": [
+                    600,
+                    1200
+                ],
+                "width": 400,
+                "height": -1,
+                "element": null
+            },
+            {
+                "name": "StateMachine",
+                "type": "class",
+                "extends": null,
+                "implements": [],
+                "related": [],
+                "position": [
+                    50,
+                    800
+                ],
+                "width": 400,
+                "height": -1,
+                "element": null
+            }
+        ]
+    },
+    {
+        "name": "Set Scene",
+        "sidebar": "setScene",
+        "size": [
+            2400,
+            3200
+        ],
+        "data": [
+            {
+                "name": "SceneManager",
+                "type": "note",
+                "content": "@reference[SceneManager]",
+                "extends": null,
+                "implements": [],
+                "related": [],
+                "lines": [
+                    {
+                        "name": "SM2",
+                        "dotted": true,
+                        "startFactor": 0.5,
+                        "endFactor": 0.5,
+                        "startFace": "bottom",
+                        "endFace": "top",
+                        "startAnnotation": "",
+                        "endAnnotation": ""
+                    }
+                ],
+                "position": [
+                    50,
+                    50
+                ],
+                "width": 200,
+                "height": -1,
+                "element": null
+            },
+            {
+                "name": "SM1",
+                "type": "box",
+                "extends": null,
+                "implements": [],
+                "related": [
+                    {
+                        "name": "S1",
+                        "startFactor": 10,
+                        "endFactor": 10,
+                        "startFace": "right",
+                        "endFace": "left",
+                        "startAnnotation": "scene.loadScene()",
+                        "endAnnotation": ""
+                    },
+                    {
+                        "name": "RM2",
+                        "startFactor": 300,
+                        "endFactor": 20,
+                        "startFace": "right",
+                        "endFace": "left",
+                        "startAnnotation": "scene.loadScene()",
+                        "endAnnotation": ""
+                    }
+                ],
+                "lines": [],
+                "position": [
+                    140,
+                    100
+                ],
+                "width": 20,
+                "height": 320,
+                "element": null
+            },
+            {
+                "name": "SM2",
+                "type": "box",
+                "extends": null,
+                "implements": [],
+                "related": [
+                    {
+                        "name": "S2",
+                        "startFactor": 80,
+                        "endFactor": 20,
+                        "startFace": "right",
+                        "endFace": "left",
+                        "startAnnotation": "scene.startScene()",
+                        "endAnnotation": ""
+                    },
+                    {
+                        "name": "S2",
+                        "startFactor": 280,
+                        "endFactor": 220,
+                        "startFace": "right",
+                        "endFace": "left",
+                        "startAnnotation": "scene.setRunning(true)",
+                        "endAnnotation": ""
+                    }
+                ],
+                "lines": [],
+                "position": [
+                    140,
+                    520
+                ],
+                "width": 20,
+                "height": 360,
+                "element": null
+            },
+
+
+            {
+                "name": "Scene",
+                "type": "note",
+                "content": "@reference[Scene]",
+                "extends": null,
+                "implements": [],
+                "related": [],
+                "lines": [
+                    {
+                        "name": "S2",
+                        "dotted": true,
+                        "startFactor": 0.5,
+                        "endFactor": 0.5,
+                        "startFace": "bottom",
+                        "endFace": "top",
+                        "startAnnotation": "",
+                        "endAnnotation": ""
+                    }
+                ],
+                "position": [
+                    450,
+                    50
+                ],
+                "width": 200,
+                "height": -1,
+                "element": null
+            },
+            {
+                "name": "S1",
+                "type": "box",
+                "extends": null,
+                "implements": [],
+                "related": [
+                    {
+                        "name": "RM1",
+                        "startFactor": 40,
+                        "endFactor": 40,
+                        "startFace": "right",
+                        "endFace": "left",
+                        "startAnnotation": "this.load.image(...)",
+                        "endAnnotation": ""
+                    },
+                    {
+                        "name": "SM1",
+                        "startFactor": 200,
+                        "endFactor": 200,
+                        "startFace": "left",
+                        "endFace": "right",
+                        "startAnnotation": "",
+                        "endAnnotation": ""
+                    }
+                ],
+                "lines": [],
+                "position": [
+                    540,
+                    100
+                ],
+                "width": 20,
+                "height": 220,
+                "element": null
+            },
+            {
+                "name": "S2",
+                "type": "box",
+                "extends": null,
+                "implements": [],
+                "related": [
+                    {
+                        "name": "FM1",
+                        "startFactor": 40,
+                        "endFactor": 20,
+                        "startFace": "right",
+                        "endFace": "left",
+                        "startAnnotation": "this.add.sprite(...)",
+                        "endAnnotation": ""
+                    },
+                    {
+                        "name": "SM2",
+                        "startFactor": 160,
+                        "endFactor": 220,
+                        "startFace": "left",
+                        "endFace": "right",
+                        "startAnnotation": "",
+                        "endAnnotation": ""
+                    },
+                    {
+                        "name": "SM2",
+                        "startFactor": 280,
+                        "endFactor": 340,
+                        "startFace": "left",
+                        "endFace": "right",
+                        "startAnnotation": "",
+                        "endAnnotation": ""
+                    }
+                ],
+                "lines": [],
+                "position": [
+                    540,
+                    580
+                ],
+                "width": 20,
+                "height": 300,
+                "element": null
+            },
+
+
+            {
+                "name": "ResourceManager",
+                "type": "note",
+                "content": "@reference[ResourceManager]",
+                "extends": null,
+                "implements": [],
+                "related": [],
+                "lines": [
+                    {
+                        "name": "RM3",
+                        "dotted": true,
+                        "startFactor": 0.5,
+                        "endFactor": 0.5,
+                        "startFace": "bottom",
+                        "endFace": "top",
+                        "startAnnotation": "",
+                        "endAnnotation": ""
+                    }
+                ],
+                "position": [
+                    850,
+                    50
+                ],
+                "width": 200,
+                "height": -1,
+                "element": null
+            },
+            {
+                "name": "RM1",
+                "type": "box",
+                "extends": null,
+                "implements": [],
+                "related": [
+                    {
+                        "name": "S1",
+                        "startFactor": 160,
+                        "endFactor": 160,
+                        "startFace": "left",
+                        "endFace": "right",
+                        "startAnnotation": "",
+                        "endAnnotation": ""
+                    }
+                ],
+                "lines": [
+                    {
+                        "name": "RM11",
+                        "startFactor": 80,
+                        "endFactor": 0,
+                        "startFace": "right",
+                        "endFace": "left",
+                        "startAnnotation": "enqueue()",
+                        "endAnnotation": ""
+                    }
+                ],
+                "position": [
+                    940,
+                    100
+                ],
+                "width": 20,
+                "height": 200,
+                "element": null
+            },
+            {
+                "name": "RM11",
+                "type": "box",
+                "extends": null,
+                "implements": [],
+                "related": [],
+                "lines": [
+                    {
+                        "name": "RM12",
+                        "startFactor": 0,
+                        "endFactor": 0,
+                        "startFace": "left",
+                        "endFace": "right",
+                        "startAnnotation": "",
+                        "endAnnotation": ""
+                    }
+                ],
+                "position": [
+                    1040,
+                    180
+                ],
+                "width": 0,
+                "height": 0,
+                "element": null
+            },
+            {
+                "name": "RM12",
+                "type": "box",
+                "extends": null,
+                "implements": [],
+                "related": [
+                    {
+                        "name": "RM1",
+                        "startFactor": 0,
+                        "endFactor": 120,
+                        "startFace": "left",
+                        "endFace": "right",
+                        "startAnnotation": "",
+                        "endAnnotation": ""
+                    }
+                ],
+                "lines": [],
+                "position": [
+                    1040,
+                    220
+                ],
+                "width": 0,
+                "height": 0,
+                "element": null
+            },
+            {
+                "name": "RM2",
+                "type": "box",
+                "extends": null,
+                "implements": [],
+                "related": [{
+                    "name": "RM21",
+                    "startFactor": 40,
+                    "endFactor": 0,
+                    "startFace": "right",
+                    "endFace": "left",
+                    "startAnnotation": "load Image",
+                    "endAnnotation": ""
+                }],
+                "lines": [],
+                "position": [
+                    940,
+                    380
+                ],
+                "width": 20,
+                "height": 60,
+                "element": null
+            },
+            {
+                "name": "RM21",
+                "type": "box",
+                "extends": null,
+                "implements": [],
+                "related": [],
+                "lines": [],
+                "position": [
+                    1040,
+                    420
+                ],
+                "width": 0,
+                "height": 0,
+                "element": null
+            },
+            {
+                "name": "RM3",
+                "type": "box",
+                "extends": null,
+                "implements": [],
+                "related": [
+                    {
+                        "name": "SM2",
+                        "startFactor": 40,
+                        "endFactor": 20,
+                        "startFace": "left",
+                        "endFace": "right",
+                        "annotationSide": "right",
+                        "startAnnotation": "",
+                        "endAnnotation": "callback()"
+                    }
+                ],
+                "lines": [],
+                "position": [
+                    940,
+                    500
+                ],
+                "width": 20,
+                "height": 60,
+                "element": null
+            },
+            {
+                "name": "RM31",
+                "type": "box",
+                "extends": null,
+                "implements": [],
+                "related": [
+                    {
+                        "name": "RM3",
+                        "startFactor": 0,
+                        "endFactor": 20,
+                        "startFace": "left",
+                        "endFace": "right",
+                        "annotationSide": "right",
+                        "startAnnotation": "",
+                        "endAnnotation": "asynchronous load completes"
+                    }
+                ],
+                "lines": [],
+                "position": [
+                    1040,
+                    520
+                ],
+                "width": 0,
+                "height": 0,
+                "element": null
+            },
+
+
+            {
+                "name": "FactoryManager",
+                "type": "note",
+                "content": "@reference[FactoryManager]",
+                "extends": null,
+                "implements": [],
+                "related": [],
+                "lines": [
+                    {
+                        "name": "FM1",
+                        "dotted": true,
+                        "startFactor": 0.5,
+                        "endFactor": 0.5,
+                        "startFace": "bottom",
+                        "endFace": "top",
+                        "startAnnotation": "",
+                        "endAnnotation": ""
+                    }
+                ],
+                "position": [
+                    1250,
+                    50
+                ],
+                "width": 200,
+                "height": -1,
+                "element": null
+            },
+            {
+                "name": "FM1",
+                "type": "box",
+                "extends": null,
+                "implements": [],
+                "related": [
+                    {
+                        "name": "S2",
+                        "startFactor": 80,
+                        "endFactor": 100,
+                        "startFace": "left",
+                        "endFace": "right",
+                        "annotationSide": "right",
+                        "startAnnotation": "",
+                        "endAnnotation": "new Sprite instance"
+                    }
+                ],
+                "lines": [],
+                "position": [
+                    1340,
+                    600
+                ],
+                "width": 20,
+                "height": 100,
+                "element": null
+            }
+        ]
+    },
+    {
+        "name": "Game Update",
+        "sidebar": "update",
+        "size": [
+            2400,
+            3200
+        ],
+        "data": [
+            {
+                "name": "GameLoop",
+                "type": "note",
+                "content": "@reference[GameLoop]",
+                "extends": null,
+                "implements": [],
+                "related": [],
+                "lines": [
+                    {
+                        "name": "GL1",
+                        "dotted": true,
+                        "startFactor": 0.5,
+                        "endFactor": 0.5,
+                        "startFace": "bottom",
+                        "endFace": "top",
+                        "startAnnotation": "",
+                        "endAnnotation": ""
+                    }
+                ],
+                "position": [
+                    50,
+                    50
+                ],
+                "width": 200,
+                "height": -1,
+                "element": null
+            },
+            {
+                "name": "GL1",
+                "type": "box",
+                "extends": null,
+                "implements": [],
+                "related": [
+                    {
+                        "name": "EventQueue",
+                        "startFactor": 30,
+                        "endFactor": 0.5,
+                        "startFace": "right",
+                        "endFace": "left",
+                        "startAnnotation": "update(deltaT)",
+                        "endAnnotation": ""
+                    },
+                    {
+                        "name": "InputReceiver",
+                        "startFactor": 130,
+                        "endFactor": 0.5,
+                        "startFace": "right",
+                        "endFace": "left",
+                        "startAnnotation": "update(deltaT)",
+                        "endAnnotation": ""
+                    },
+                    {
+                        "name": "SceneManager",
+                        "startFactor": 230,
+                        "endFactor": 0.5,
+                        "startFace": "right",
+                        "endFace": "left",
+                        "startAnnotation": "update(deltaT)",
+                        "endAnnotation": ""
+                    },
+                    {
+                        "name": "AudioManager",
+                        "startFactor": 830,
+                        "endFactor": 0.5,
+                        "startFace": "right",
+                        "endFace": "left",
+                        "startAnnotation": "update(deltaT)",
+                        "endAnnotation": ""
+                    },
+                    {
+                        "name": "ResourceManager",
+                        "startFactor": 930,
+                        "endFactor": 0.5,
+                        "startFace": "right",
+                        "endFace": "left",
+                        "startAnnotation": "update(deltaT)",
+                        "endAnnotation": ""
+                    }
+                ],
+                "lines": [],
+                "position": [
+                    140,
+                    100
+                ],
+                "width": 20,
+                "height": 950,
+                "element": null
+            },
+
+
+            {
+                "name": "EventQueue",
+                "type": "note",
+                "content": "@reference[EventQueue]",
+                "extends": null,
+                "implements": [],
+                "related": [],
+                "lines": [],
+                "position": [
+                    450,
+                    120
+                ],
+                "width": 200,
+                "height": -1,
+                "element": null
+            },
+
+
+            {
+                "name": "InputReceiver",
+                "type": "note",
+                "content": "@reference[InputReceiver]",
+                "extends": null,
+                "implements": [],
+                "related": [],
+                "lines": [],
+                "position": [
+                    450,
+                    220
+                ],
+                "width": 200,
+                "height": -1,
+                "element": null
+            },
+
+
+            {
+                "name": "SceneManager",
+                "type": "note",
+                "content": "@reference[SceneManager]",
+                "extends": null,
+                "implements": [],
+                "related": [
+                    {
+                        "name": "Scene",
+                        "startFactor": 0.5,
+                        "endFactor": 0.5,
+                        "startFace": "right",
+                        "endFace": "left",
+                        "startAnnotation": "",
+                        "endAnnotation": ""
+                    }
+                ],
+                "lines": [],
+                "position": [
+                    450,
+                    320
+                ],
+                "width": 200,
+                "height": -1,
+                "element": null
+            },
+            {
+                "name": "Scene",
+                "type": "note",
+                "content": "@reference[Scene]",
+                "extends": null,
+                "implements": [],
+                "related": [],
+                "lines": [
+                    {
+                        "name": "S1",
+                        "dotted": true,
+                        "startFactor": 0.5,
+                        "endFactor": 0.5,
+                        "startFace": "bottom",
+                        "endFace": "top",
+                        "startAnnotation": "",
+                        "endAnnotation": ""
+                    }
+                ],
+                "position": [
+                    850,
+                    320
+                ],
+                "width": 200,
+                "height": -1,
+                "element": null
+            },
+            {
+                "name": "S1",
+                "type": "box",
+                "extends": null,
+                "implements": [],
+                "related": [
+                    {
+                        "name": "CustomScene",
+                        "startFactor": 40,
+                        "endFactor": 0.5,
+                        "startFace": "right",
+                        "endFace": "left",
+                        "startAnnotation": "this.updateScene(deltaT)",
+                        "endAnnotation": ""
+                    },
+                    {
+                        "name": "AIManager",
+                        "startFactor": 130,
+                        "endFactor": 0.5,
+                        "startFace": "right",
+                        "endFace": "left",
+                        "startAnnotation": "update(deltaT)",
+                        "endAnnotation": ""
+                    },
+                    {
+                        "name": "PhysicsManager",
+                        "startFactor": 230,
+                        "endFactor": 0.5,
+                        "startFace": "right",
+                        "endFace": "left",
+                        "startAnnotation": "update(deltaT)",
+                        "endAnnotation": ""
+                    },
+                    {
+                        "name": "SceneGraph",
+                        "startFactor": 330,
+                        "endFactor": 0.5,
+                        "startFace": "right",
+                        "endFace": "left",
+                        "startAnnotation": "update(deltaT)",
+                        "endAnnotation": ""
+                    },
+                    {
+                        "name": "Viewport",
+                        "startFactor": 430,
+                        "endFactor": 0.5,
+                        "startFace": "right",
+                        "endFace": "left",
+                        "startAnnotation": "update(deltaT)",
+                        "endAnnotation": ""
+                    },
+                    {
+                        "name": "GL1",
+                        "startFactor": 480,
+                        "endFactor": 750,
+                        "startFace": "left",
+                        "endFace": "right",
+                        "startAnnotation": "",
+                        "endAnnotation": ""
+                    }
+                ],
+                "lines": [],
+                "position": [
+                    940,
+                    370
+                ],
+                "width": 20,
+                "height": 500,
+                "element": null
+            },
+
+            {
+                "name": "CustomScene",
+                "type": "note",
+                "content": "Custom Scene Subclass",
+                "extends": null,
+                "implements": [],
+                "related": [],
+                "lines": [],
+                "position": [
+                    1250,
+                    390
+                ],
+                "width": 200,
+                "height": -1,
+                "element": null
+            },
+
+            {
+                "name": "AIManager",
+                "type": "note",
+                "content": "@reference[AIManager]",
+                "extends": null,
+                "implements": [],
+                "related": [],
+                "lines": [],
+                "position": [
+                    1250,
+                    490
+                ],
+                "width": 200,
+                "height": -1,
+                "element": null
+            },
+            {
+                "name": "PhysicsManager",
+                "type": "note",
+                "content": "@reference[PhysicsManager]",
+                "extends": null,
+                "implements": [],
+                "related": [],
+                "lines": [],
+                "position": [
+                    1250,
+                    590
+                ],
+                "width": 200,
+                "height": -1,
+                "element": null
+            },
+            {
+                "name": "SceneGraph",
+                "type": "note",
+                "content": "@reference[SceneGraph]",
+                "extends": null,
+                "implements": [],
+                "related": [],
+                "lines": [],
+                "position": [
+                    1250,
+                    690
+                ],
+                "width": 200,
+                "height": -1,
+                "element": null
+            },
+            {
+                "name": "Viewport",
+                "type": "note",
+                "content": "@reference[Viewport]",
+                "extends": null,
+                "implements": [],
+                "related": [],
+                "lines": [],
+                "position": [
+                    1250,
+                    790
+                ],
+                "width": 200,
+                "height": -1,
+                "element": null
+            },
+
+
+            {
+                "name": "AudioManager",
+                "type": "note",
+                "content": "@reference[AudioManager]",
+                "extends": null,
+                "implements": [],
+                "related": [],
+                "lines": [],
+                "position": [
+                    450,
+                    920
+                ],
+                "width": 200,
+                "height": -1,
+                "element": null
+            },
+            {
+                "name": "ResourceManager",
+                "type": "note",
+                "content": "@reference[ResourceManager]",
+                "extends": null,
+                "implements": [],
+                "related": [],
+                "lines": [],
+                "position": [
+                    450,
+                    1020
+                ],
+                "width": 200,
+                "height": -1,
+                "element": null
+            }
+        ]
+    }
+]
