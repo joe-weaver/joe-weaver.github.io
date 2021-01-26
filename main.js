@@ -303,7 +303,7 @@ function constructClassDiagram(content, objs, width, height){
         } else if(obj.type === "box"){
             umlObj = makeUMLBox(obj.name, {width: obj.width + "px", height: obj.height + "px", left: obj.position[0] + "px", top: obj.position[1] + "px"})
         } else {
-            umlObj = makeUMLItem(getData(obj.name), obj.linkTo, {width: obj.width + "px", left: obj.position[0] + "px", top: obj.position[1] + "px"});
+            umlObj = makeUMLItem(getData(obj.name), obj, obj.linkTo, {width: obj.width + "px", left: obj.position[0] + "px", top: obj.position[1] + "px"});
         }
 
         console.log(umlObj);
@@ -363,19 +363,45 @@ function constructClassDiagram(content, objs, width, height){
             }
         }
 
-        for(let con of obj.related){
-            connections.push({
-                start: obj.name,
-                end: con.name,
-                startFactor: con.startFactor,
-                endFactor: con.endFactor,
-                startFace: con.startFace,
-                endFace: con.endFace,
-                type: "other",
-                annotationSide: con.annotationSide,
-                startAnnotation: con.startAnnotation,
-                endAnnotation: con.endAnnotation
-            });
+        if(obj.composition){
+            for(let con of obj.composition){
+                let startName = con.name;
+                let endName = obj.name;
+                if(con.reversed){
+                    startName = obj.name;
+                    endName = con.name;
+                }
+
+                connections.push({
+                    start: startName,
+                    end: endName,
+                    startFactor: con.startFactor,
+                    endFactor: con.endFactor,
+                    startFace: con.startFace,
+                    endFace: con.endFace,
+                    type: "has",
+                    annotationSide: con.annotationSide,
+                    startAnnotation: con.startAnnotation,
+                    endAnnotation: con.endAnnotation
+                });
+            }
+        }
+
+        if(obj.related){
+            for(let con of obj.related){
+                connections.push({
+                    start: obj.name,
+                    end: con.name,
+                    startFactor: con.startFactor,
+                    endFactor: con.endFactor,
+                    startFace: con.startFace,
+                    endFace: con.endFace,
+                    type: "other",
+                    annotationSide: con.annotationSide,
+                    startAnnotation: con.startAnnotation,
+                    endAnnotation: con.endAnnotation
+                });
+            }
         }
     }
 
@@ -485,7 +511,7 @@ function constructClassDiagram(content, objs, width, height){
 
         let mag = Math.sqrt((start[0] - end[0])*(start[0] - end[0]) + (start[1] - end[1])*(start[1] - end[1]));
 
-        let arrowSize = con.type === "other" ? 10 : 15;
+        let arrowSize = con.type === "other" || con.type === "has" ? 10 : 15;
 
         ar1[0] = end[0] + ar1[0] * arrowSize;
         ar1[1] = end[1] + ar1[1] * arrowSize;
@@ -498,9 +524,14 @@ function constructClassDiagram(content, objs, width, height){
         
         if(con.type === "line"){
             if(con.dotted){
-                ctx.setLineDash([10, 10]); // dashes are 10px and spaces are 10px
+                ctx.setLineDash([10, 5]); // dashes are 10px and spaces are 10px
             }
             ctx.moveTo(end[0], end[1]);
+        } else if(con.type === "has"){
+            ctx.moveTo(end[0] + 2*arrowSize*0.8*(start[0] - end[0])/mag, end[1] + 2*arrowSize*0.8*(start[1] - end[1])/mag);
+            ctx.lineTo(ar1[0], ar1[1]);
+            ctx.lineTo(end[0], end[1]);
+            ctx.lineTo(ar2[0], ar2[1]);
         } else {
             ctx.moveTo(ar1[0], ar1[1]);
             ctx.lineTo(end[0], end[1]);
@@ -514,6 +545,9 @@ function constructClassDiagram(content, objs, width, height){
                 ctx.setLineDash([10, 10]); // dashes are 10px and spaces are 10px
             }
             ctx.moveTo(end[0] + arrowSize*0.8*(start[0] - end[0])/mag, end[1] + arrowSize*0.8*(start[1] - end[1])/mag);
+        } else if(con.type === "has"){
+            ctx.lineTo(end[0] + 2*arrowSize*0.8*(start[0] - end[0])/mag, end[1] + 2*arrowSize*0.8*(start[1] - end[1])/mag);
+            ctx.fill();
         } else if(con.type !== "line"){
             ctx.lineTo(ar1[0], ar1[1]);
             ctx.fill();
@@ -661,7 +695,11 @@ function makeFunctions(functions){
     return funcContainer;
 }
 
-function makeUMLItem(data, link, sizeAndPosition){
+function makeUMLItem(data, obj, link, sizeAndPosition){
+    if(data === null){
+        throw `Data is null for "${obj.name}"`;
+    }
+
     const umlBox = $(`<div id=${data.name} class="uml-box code"></div>`);
 
     const umlHeader = $(`<div class="uml-header"><div>${(data.isInterface ? "&lt;&lt;interface&gt;&gt; " : "") + linkFromType(data.name)}</div></div>`);
@@ -669,6 +707,8 @@ function makeUMLItem(data, link, sizeAndPosition){
     if(link !== undefined){
         umlHeader.append(`<div><a href="/#diagrams/${link.destination}">${link.text}</a></div>`);
     }
+
+    const umlDescription = $(`<div class="uml-description">${obj.description}</div>`);
 
     const umlMembers = $(`<div class="uml-members"></div>`);
     for(let member of data.members){
@@ -697,6 +737,7 @@ function makeUMLItem(data, link, sizeAndPosition){
     }
 
     umlBox.append(umlHeader);
+    umlBox.append(umlDescription);
     umlBox.append(umlMembers);
     umlBox.append(umlFunctions);
 

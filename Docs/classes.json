@@ -9,6 +9,7 @@
         "data": [
             {
                 "name": "Positioned",
+                "description": "Describes a class that has a position",
                 "type": "interface",
                 "extends": null,
                 "implements": [],
@@ -23,6 +24,7 @@
             },
             {
                 "name": "Unique",
+                "description": "Describes a class that has a unique identifier",
                 "type": "interface",
                 "extends": null,
                 "implements": [],
@@ -37,6 +39,7 @@
             },
             {
                 "name": "Actor",
+                "description": "Describes a class that has an AI controller",
                 "linkTo": {
                     "text": "Go to AI class diagram",
                     "destination": "ai"
@@ -55,6 +58,7 @@
             },
             {
                 "name": "Physical",
+                "description": "Describes a class that can be registered in the physics engine",
                 "type": "interface",
                 "extends": null,
                 "implements": [],
@@ -69,6 +73,7 @@
             },
             {
                 "name": "GameNode",
+                "description": "The primary representation of an object in the game world.",
                 "type": "class",
                 "extends": null,
                 "implements": [
@@ -109,8 +114,10 @@
                         "endAnnotation": ""
                     }
                 ],
-                "related": [
+                "related": [],
+                "composition": [
                     {
+                        "reversed": true,
                         "name": "Scene",
                         "startFactor": 0.5,
                         "endFactor": 0.5,
@@ -122,7 +129,7 @@
                 ],
                 "position": [
                     550,
-                    600
+                    550
                 ],
                 "width": 400,
                 "height": -1,
@@ -130,6 +137,7 @@
             },
             {
                 "name": "Scene",
+                "description": "The current game world",
                 "linkTo": {
                     "text": "Go to Scene class diagram",
                     "destination": "scene"
@@ -162,6 +170,7 @@
             },
             {
                 "name": "CanvasNode",
+                "description": "A GameNode that can be rendered to the screen",
                 "type": "class",
                 "extends": {
                     "name": "GameNode",
@@ -188,6 +197,7 @@
             },
             {
                 "name": "Graphic",
+                "description": "A CanvasNode that is rendered purely through code.",
                 "type": "class",
                 "extends": {
                     "name": "CanvasNode",
@@ -208,6 +218,7 @@
             },
             {
                 "name": "Tilemap",
+                "description": "A layer of a tilemap.",
                 "type": "class",
                 "extends": {
                     "name": "CanvasNode",
@@ -228,6 +239,7 @@
             },
             {
                 "name": "Sprite",
+                "description": "A CanvasNode that is drawn from a loaded image",
                 "type": "class",
                 "extends": {
                     "name": "CanvasNode",
@@ -248,6 +260,7 @@
             },
             {
                 "name": "UIElement",
+                "description": "A CanvasNode that can be interacted with in a user interface",
                 "type": "class",
                 "extends": {
                     "name": "CanvasNode",
@@ -268,6 +281,7 @@
             },
             {
                 "name": "Rect",
+                "description": "A colored rectangle with a border",
                 "type": "class",
                 "extends": {
                     "name": "Graphic",
@@ -288,6 +302,7 @@
             },
             {
                 "name": "Point",
+                "description": "A colored point",
                 "type": "class",
                 "extends": {
                     "name": "Graphic",
@@ -308,6 +323,7 @@
             },
             {
                 "name": "OrthogonalTilemap",
+                "description": "A tilemap that is a 2D grid",
                 "type": "class",
                 "extends": {
                     "name": "Tilemap",
@@ -328,6 +344,7 @@
             },
             {
                 "name": "AnimatedSprite",
+                "description": "A sprite that has animation frames and can play different animations",
                 "type": "class",
                 "extends": {
                     "name": "Sprite",
@@ -348,6 +365,7 @@
             },
             {
                 "name": "Label",
+                "description": "A UIElement that displays text",
                 "type": "class",
                 "extends": {
                     "name": "UIElement",
@@ -368,6 +386,7 @@
             },
             {
                 "name": "Slider",
+                "description": "A UIElement that has an adjustable slider",
                 "type": "class",
                 "extends": {
                     "name": "UIElement",
@@ -388,6 +407,7 @@
             },
             {
                 "name": "Button",
+                "description": "A label that can be clicked by the user",
                 "type": "class",
                 "extends": {
                     "name": "Label",
@@ -408,6 +428,7 @@
             },
             {
                 "name": "TextInput",
+                "description": "A UIElement that can be typed in",
                 "type": "class",
                 "extends": {
                     "name": "Label",
@@ -438,6 +459,7 @@
         "data": [
             {
                 "name": "GameNode",
+                "description": "An object in the game world",
                 "linkTo": {
                     "text": "Go to GameNode class diagram",
                     "destination": "Nodes"
@@ -445,19 +467,22 @@
                 "type": "class",
                 "extends": null,
                 "implements": [],
-                "related": [
+                "related": [],
+                "composition": [
                     {
+                        "reversed": true,
                         "name": "Layer",
-                        "startFactor": 0.5,
-                        "endFactor": 0.5,
+                        "startFactor": 0.33,
+                        "endFactor": 1,
                         "startFace": "right",
                         "endFace": "left",
                         "startAnnotation": "n",
                         "endAnnotation": "1"
                     },
                     {
+                        "reversed": true,
                         "name": "Scene",
-                        "startFactor": 0.5,
+                        "startFactor": 0.66,
                         "endFactor": 0.5,
                         "startFace": "right",
                         "endFace": "left",
@@ -475,14 +500,16 @@
             },
             {
                 "name": "Layer",
+                "description": "A level of depth in the game world",
                 "type": "class",
                 "extends": null,
                 "implements": [],
-                "related": [
+                "composition": [
                     {
+                        "reversed": true,
                         "name": "Scene",
                         "startFactor": 0.5,
-                        "endFactor": 0.33,
+                        "endFactor": 0,
                         "startFace": "right",
                         "endFace": "left",
                         "startAnnotation": "n",
@@ -499,11 +526,13 @@
             },
             {
                 "name": "Scene",
+                "description": "The game world",
                 "type": "class",
                 "extends": null,
                 "implements": [],
-                "related": [
+                "composition": [
                     {
+                        "reversed": true,
                         "name": "SceneManager",
                         "startFactor": 0.5,
                         "endFactor": 0.5,
@@ -523,12 +552,14 @@
             },
             {
                 "name": "SceneManager",
+                "description": "An interface that handles scene lifecycles and scene switching",
                 "type": "class",
                 "extends": null,
                 "implements": [],
-                "related": [
+                "composition": [
                     {
-                        "name": "GameLoop",
+                        "reversed": true,
+                        "name": "Game",
                         "startFactor": 0.5,
                         "endFactor": 0.5,
                         "startFace": "top",
@@ -546,7 +577,8 @@
                 "element": null
             },
             {
-                "name": "GameLoop",
+                "name": "Game",
+                "description": "The game",
                 "type": "class",
                 "extends": null,
                 "implements": [],
@@ -561,11 +593,13 @@
             },
             {
                 "name": "ResourceManager",
+                "description": "A service that allows resources to be loaded from file and manages their lifecycles",
                 "type": "class",
                 "extends": null,
                 "implements": [],
-                "related": [
+                "composition": [
                     {
+                        "reversed": true,
                         "name": "Scene",
                         "startFactor": 0.5,
                         "endFactor": 0.33,
@@ -585,11 +619,13 @@
             },
             {
                 "name": "FactoryManager",
+                "description": "A service that allows for easy creation of GameNodes",
                 "type": "class",
                 "extends": null,
                 "implements": [],
-                "related": [
+                "composition": [
                     {
+                        "reversed": true,
                         "name": "Scene",
                         "startFactor": 0.5,
                         "endFactor": 0.66,
@@ -609,11 +645,13 @@
             },
             {
                 "name": "SceneGraph",
+                "description": "The data structure that handles scoping requests",
                 "type": "class",
                 "extends": null,
                 "implements": [],
-                "related": [
+                "composition": [
                     {
+                        "reversed": true,
                         "name": "Scene",
                         "startFactor": 1,
                         "endFactor": 0,
@@ -633,11 +671,13 @@
             },
             {
                 "name": "AIManager",
+                "description": "Maintains references to AI types and Actors in the game world",
                 "type": "class",
                 "extends": null,
                 "implements": [],
-                "related": [
+                "composition": [
                     {
+                        "reversed": true,
                         "name": "Scene",
                         "startFactor": 0.5,
                         "endFactor": 0.33,
@@ -657,11 +697,13 @@
             },
             {
                 "name": "PhysicsManager",
+                "description": "Provides an interface for managing physics movement.",
                 "type": "class",
                 "extends": null,
                 "implements": [],
-                "related": [
+                "composition": [
                     {
+                        "reversed": true,
                         "name": "Scene",
                         "startFactor": 0.5,
                         "endFactor": 0.66,
@@ -681,11 +723,13 @@
             },
             {
                 "name": "NavigationManager",
+                "description": "Maintains a list of navigation structures, and exposes functions for getting routes",
                 "type": "class",
                 "extends": null,
                 "implements": [],
-                "related": [
+                "composition": [
                     {
+                        "reversed": true,
                         "name": "Scene",
                         "startFactor": 0,
                         "endFactor": 1,
@@ -705,6 +749,7 @@
             },
             {
                 "name": "TestPhysicsManager",
+                "description": "Handles physics by assuming that all objects besides the current one are static",
                 "type": "class",
                 "extends": {
                     "name": "PhysicsManager",
@@ -727,6 +772,7 @@
             },
             {
                 "name": "SceneGraphArray",
+                "description": "Stores GameNodes in an array and iterates through the array for scoping",
                 "type": "class",
                 "extends": {
                     "name": "SceneGraph",
@@ -749,6 +795,7 @@
             },
             {
                 "name": "SceneGraphQuadTree",
+                "description": "Stores GameNodes in a QuadTree and peforms AABB boundary checks for scoping",
                 "type": "class",
                 "extends": {
                     "name": "SceneGraph",
@@ -781,6 +828,7 @@
         "data": [
             {
                 "name": "Scene",
+                "description": "The game world",
                 "linkTo": {
                     "text": "Go to Scene class diagram",
                     "destination": "scene"
@@ -799,11 +847,13 @@
             },
             {
                 "name": "AIManager",
+                "description": "Keeps a list of registered AI and Actors",
                 "type": "class",
                 "extends": null,
                 "implements": [],
-                "related": [
+                "composition": [
                     {
+                        "reversed": true,
                         "name": "Scene",
                         "startFactor": 0.5,
                         "endFactor": 0.5,
@@ -823,11 +873,13 @@
             },
             {
                 "name": "Actor",
+                "description": "A class that has an AI controller",
                 "type": "interface",
                 "extends": null,
                 "implements": [],
-                "related": [
+                "composition": [
                     {
+                        "reversed": true,
                         "name": "AIManager",
                         "startFactor": 0.5,
                         "endFactor": 0.5,
@@ -847,6 +899,7 @@
             },
             {
                 "name": "GameNode",
+                "description": "An object in the game world",
                 "linkTo": {
                     "text": "Go to GameNode class diagram",
                     "destination": "Nodes"
@@ -873,11 +926,13 @@
             },
             {
                 "name": "AI",
+                "description": "A strategy that controls an Actor",
                 "type": "interface",
                 "extends": null,
                 "implements": [],
-                "related": [
+                "composition": [
                     {
+                        "reversed": true,
                         "name": "Actor",
                         "startFactor": 0.5,
                         "endFactor": 0.5,
@@ -897,6 +952,7 @@
             },
             {
                 "name": "StateMachineAI",
+                "description": "An AI that uses a push down automata to handle Actor state and perform actions",
                 "type": "class",
                 "extends": {
                     "name": "StateMachine",
@@ -917,8 +973,9 @@
                     "startAnnotation": "",
                     "endAnnotation": ""
                 }],
-                "related": [
+                "composition": [
                     {
+                        "reversed": true,
                         "name": "GameNode",
                         "startFactor": 0.5,
                         "endFactor": 0.66,
@@ -938,6 +995,7 @@
             },
             {
                 "name": "StateMachine",
+                "description": "An implementation of a push down automata with hierarchical states",
                 "type": "class",
                 "extends": null,
                 "implements": [],
@@ -953,8 +1011,8 @@
         ]
     },
     {
-        "name": "Set Scene",
-        "sidebar": "setScene",
+        "name": "Initialize Scene",
+        "sidebar": "initScene",
         "size": [
             2400,
             3200
@@ -1008,7 +1066,7 @@
                         "endFactor": 20,
                         "startFace": "right",
                         "endFace": "left",
-                        "startAnnotation": "scene.loadScene()",
+                        "startAnnotation": "resourceManager.loadResourcesFromQueue()",
                         "endAnnotation": ""
                     }
                 ],
@@ -1431,9 +1489,9 @@
         ],
         "data": [
             {
-                "name": "GameLoop",
+                "name": "Game",
                 "type": "note",
-                "content": "@reference[GameLoop]",
+                "content": "@reference[Game]",
                 "extends": null,
                 "implements": [],
                 "related": [],
