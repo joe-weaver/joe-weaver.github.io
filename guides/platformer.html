@@ -1,0 +1,330 @@
+<div id="guide">
+    <h1>Platformer Game</h1>
+    <h2 style="color:orange">WARNING - THIS GUIDE IS A WORK IN PROGRESS, IT IS NOT YET COMPLETE</h2>
+    <p>
+        This guide will walk you through how to create a simple platformer game with Wolfie2D,
+        and will introduce several features of the game engine.
+    </p>
+    <p>
+        It is assumed that at this point, you have a project file properly installed which you are able to serve
+        with Web Server for Chrome. If not, follow the <a href="/#guides/setup">guide on setup</a>.
+    </p>
+    <h3><code>main.ts</code> - Your entry point into the application</h3>
+    <hr>
+    <p>
+        The code for every Wolfie2D project starts with the <code>main.ts</code> file in <code>src/</code>
+        directory of the project. Here, you will create your game instance, start the game, and add a scene to display.
+        By default, Wolfie2D displays the scene defined by <code>default_scene.ts</code>.
+        The code in <code>main.ts</code> is as follows:
+    </p>
+    
+    <div class="code-block">
+    <div class="header">main.ts</div>
+    <pre class="code-body"><code>
+    import Game from "./Wolfie2D/Loop/Game";
+    import default_scene from "./default_scene";
+    
+    <span class="code-comment">// The main function is your entrypoint into Wolfie2D. Specify your first scene and any options here.</span>
+    (function main(){
+        <span class="code-comment">// These are options for initializing the game</span>
+        <span class="code-comment">// Here, we'll simply set the size of the viewport, and make the background of the game black</span>
+        let options = {
+            viewportSize: {x: 800, y: 600},
+            clearColor: {r: 0, g: 0, b: 0},
+        }
+    
+        <span class="code-comment">// Create our game. This will create all of the systems.</span>
+        const demoGame = new Game(options);
+    
+        <span class="code-comment">// Run our game. This will start the game loop and get the updates and renders running.</span>
+        demoGame.start();
+    
+        <span class="code-comment">// For now, we won't specify any scene options.</span>
+        let sceneOptions = {};
+    
+        <span class="code-comment">// Add our first scene. This will load this scene into the game world.</span>
+        demoGame.getSceneManager().addScene(default_scene, sceneOptions);
+    })();
+    </code></pre></div>
+    <p>
+        There isn't too much going on here. First, we create a <a href="#docs/GameLoop/Game">Game</a> object with
+        the options we specify, then we start the game. Last, we get the SceneManager and add the default_scene constructor
+        that we imported. For a most games, this is all that will be in the <code>main.ts</code> file -
+        the only thing you may really need to change is the Scene constructor and the options given to the game and
+        the scene.
+    </p>
+    <h3>A Custom Scene</h3>
+    <hr>
+    <p>
+        Instead of using the default project, let's create our own scene. In the <code>src/</code>
+        directory, create a new file called <code>Platformer.ts</code>.
+        Inside of that file, export a new class that extends Scene:
+    </p>
+    <div class="code-block">
+    <div class="header">Platformer.ts</div>
+    <pre class="code-body"><code>
+    import Scene from "./Wolfie2d/Scene/Scene";
+
+    export default class Platformer extends Scene {
+
+    }
+    </code>
+    </pre>
+    </div>
+    <p>
+        Then replace that as the Scene loaded in <code>main.ts</code>:
+    </p>
+    <div class="code-block">
+    <div class="header">main.ts</div>
+    <pre class="code-body"><code>
+        ...
+        import Platformer from "./Platformer";
+    
+        (function main(){
+            <span class="code-comment">// Our sprites are small, so specify a zoom level of 4. Also change the clear color and set up key bindings</span>
+            let options = {
+                canvasSize: {x: 800, y: 600},
+                zoomLevel: 4,
+                clearColor: {r: 34, g: 32, b: 52},
+                inputs: [
+                    { name: "left", keys: ["a"] },
+                    { name: "right", keys: ["d"] },
+                    { name: "jump", keys: ["space", "w"]}
+                ]
+            }
+           ...        
+            <span class="code-comment">// We still don't need to specify scene options.</span>
+            let sceneOptions = {};
+        
+            <span class="code-comment">// Add our own scene as the initial scene.</span>
+            demoGame.getSceneManager().addScene(Platformer, sceneOptions);
+        })();
+    </code>
+    </pre>
+    </div>
+    <p>
+        Currently, our new scene doesn't do anything exciting, or any thing at all. Let's change that.
+    </p>
+    <p>
+        A Scene has 3 primary methods for controlling its behavior: <code>loadScene()</code>, <code>startScene()</code>, and <code>updateScene()</code>.
+        They behave as they sound like they should - <code>loadScene()</code> allows you to load assets for use by the Scene,
+        <code>startScene()</code> does all behaviors when the Scene starts, after loading, but before any update occur,
+        and <code>updateScene()</code> allows you to control the behavior of the Scene and any GameNodes in the Scene
+        on a frame-to-frame basis.
+    </p>
+    <p>
+        Let's start with <code>loadScene()</code> and bring in a sprite to use as our player character.
+        There are some assets included in Wolfie2D already, which are in the <code>dist/demo_assets/</code> folder.
+        For this project, let's take the animated player sprite from <code>demo_assets/spritesheets/platformer/player.json</code>.
+        We'll also have to give the load method a key for the sprite, so we can reference it later - let's make that simply <code>player</code>.
+        If we put this into the <code>loadScene()</code> method, we get:
+    </p>
+    <div class="code-block">
+    <div class="header">Platformer.ts</div>
+    <pre class="code-body"><code>
+    loadScene(){
+        this.load.spritesheet("player", "demo_assets/spriteheets/platformer/player.json");
+    }
+    </code>
+    </pre>
+    </div>
+    <p>
+        Notice that we reference the <code>player.json</code> file, and not the corresponding spritesheet.
+        This is because the format of the json file contains information about the associated image.
+        If you want to see the gritty details of the json file, follow the path in your text editor and check it out.
+    </p>
+    <p>
+        Now, we can add the player to the scene. To do this, we can use the key we created to make an AnimatedSprite
+        object in the <code>startScene()</code> method:
+    </p>
+    <div class="code-block">
+    <div class="header">Platformer.ts</div>
+    <pre class="code-body"><code>
+    private player: AnimatedSprite;
+    ...
+    startScene(){
+        <span class="code-comment">// We need to add a layer for the player to go on. We'll give it a depth of 1</span>
+        this.addLayer("primary", 1);
+
+        this.player = this.add.animatedSprite("player", "primary");
+        this.player.animation.play("IDLE");
+        this.player.postion.set(this.viewport.getCenter().x, this.viewport.getCenter().y);
+    }
+    </code>
+    </pre>
+    </div>
+    <p>
+        Now, if we serve our application and look at the browser,
+        we see a static version of our player in the center of the screen:
+    </p>
+    <img src="images/platformer_player_img.png" alt="The player in the middle of the screen">
+    <p>
+        Great! But this isn't much of a game. Let's load and add some more assets and make our game world a little more filled out.
+    </p>
+    <div class="code-block">
+    <div class="header">Platformer.ts</div>
+    <pre class="code-body"><code>
+    private player: AnimatedSprite;
+    ...
+    loadScene(){
+        <span class="code-comment">// Load the player spritesheet</span>
+        this.load.spritesheet("player", "demo_assets/spritesheets/platformer/player.json");
+
+        <span class="code-comment">// Load the tilemap</span>
+        this.load.tilemap("platformer", "demo_assets/tilemaps/platformer/platformer.json");
+
+        <span class="code-comment">// Load the background image</span>
+        this.load.image("background", "demo_assets/images/platformer_background.png");
+
+        <span class="code-comment">// Load a jump sound</span>
+        this.load.audio("jump", "demo_assets/sounds/jump.wav");
+    }
+    ...
+    startScene(){
+        this.addLayer("primary", 1);
+
+        <span class="code-comment">// Add the player in the starting position</span>
+        this.player = this.add.animatedSprite("player", "primary");
+        this.player.animation.play("IDLE");
+        this.player.position.set(3*16, 18*16);
+
+        <span class="code-comment">// Size of the tilemap is 64x20. Tile size is 16x16</span>
+        this.viewport.setBounds(0, 0, 64*16, 20*16);
+        this.viewport.follow(this.player);
+
+        <span class="code-comment">// Add the tilemap. Top left corner is (0, 0) by default</span>
+        this.add.tilemap("platformer");
+
+        <span class="code-comment">// Add a background to the scene</span>
+        this.addParallaxLayer("bg", new Vec2(0.5, 1), -1);
+        let bg = this.add.sprite("background", "bg");
+        bg.position.set(bg.size.x/2, bg.size.y/2);
+    }
+    </code>
+    </pre>
+    </div>
+    <p>
+        Now the world looks a little better. From the starting position,
+        you can see some of the background and some of the tilemap.
+        
+    </p>
+    <img src="images/platformer_more_assets_img.png" alt="More assets">
+    <p>
+        But in order to see the whole world,
+        our player is going to need to move around. We'll do that by making a basic AI class:
+    </p>
+    <div class="code-block">
+    <div class="header">PlatformerPlayerController.ts</div>
+    <pre class="code-body"><code>
+    export default class PlayerController implements AI {
+        protected owner: AnimatedSprite;
+        protected jumpSoundKey: string;
+        protected emitter: Emitter;
+    
+        initializeAI(owner: AnimatedSprite, options: Record&lt;string, any&gt;): void {
+            this.owner = owner;
+            this.jumpSoundKey = options.jumpSoundKey;
+            this.emitter = new Emitter();
+        }
+    
+        handleEvent(event: GameEvent): void {
+            <span class="code-comment">// Do nothing for now</span>
+        }
+    
+        update(deltaT: number): void {
+            <span class="code-comment">// Get the direction from key presses</span>
+            const x = (Input.isPressed("left") ? -1 : 0) + (Input.isPressed("right") ? 1 : 0);
+            
+            <span class="code-comment">// Get last velocity and override x</span>
+            const velocity = this.owner.getLastVelocity();
+            velocity.x = x * 100 * deltaT;
+    
+            <span class="code-comment">// Check for jump condition</span>
+            if(this.owner.onGround && Input.isJustPressed("jump")){
+                <span class="code-comment">// We are jumping</span>
+                velocity.y = -250*deltaT;
+    
+                <span class="code-comment">// Loop our jump animation</span>
+                this.owner.animation.play("JUMP", true);
+    
+                <span class="code-comment">// Play the jump sound</span>
+                this.emitter.fireEvent(GameEventType.PLAY_SOUND, {key: this.jumpSoundKey, loop: false});
+            } else {
+                velocity.y += 10*deltaT;
+            }
+    
+            if(this.owner.onGround && !Input.isJustPressed("jump")){
+                <span class="code-comment">// If we're on the ground, but aren't jumping, show walk animation</span>
+                if(velocity.x === 0){
+                        this.owner.animation.playIfNotAlready("IDLE", true);
+                } else {
+                    this.owner.animation.playIfNotAlready("WALK", true);
+                }
+            }
+    
+            <span class="code-comment">// If we're walking left, flip the sprite</span>
+            this.owner.invertX = velocity.x &lt; 0;
+            
+            this.owner.move(velocity);
+        }
+    }
+    </code>
+    </pre>
+    </div>
+    <p>
+        There's a lot going on here. But let's break it down.
+        First of all, by default, an AI receives its owner and some options through its initialization.
+        We make sure to typecast to an AnimatedSprite here so we can use animations.
+        We also make sure to create an emitter, since this will allow us to communicate with the audio manager later on.
+    </p>
+    <p>
+        For our update, we take the player input information and turn it into a Vec2 for easy manipulation.
+        Much of the movement code we're using here ties into the Physics system through the basic GameNode class.
+        The first utility we use is <code>getLastVelocity()</code>, which simply does what it says,
+        and retreives the velocity AFTER the last move. This is key here - if we collided with an object
+        last frame, our velocity will be 0. The next physics related utility we use is <code>onGround</code>.
+        This is a boolean created for your convenience. <code>onGround</code> just tells you whether or not the
+        GameNode collided with anything on its bottom face last frame. Similarly, you also have access to
+        <code>onCeiling</code> and <code>onWall</code>, which are not needed here. Lastly, to perform our
+        movement through the physics system and assure that collisions are working, we call <code>move()</code>.
+        It is worth noting that this method has no return, and does not immediately move the GameNode.
+        It waits until the end of the update frame, and then handles movement for all moving nodes.
+    </p>
+    <p>
+        Other tricks used here are the animations, which simply reference the animation player from
+        the AnimatedSprite class, and the sounds, for which we fire an event for the AudioManager.
+    </p>
+    <p>
+        This player AI works fine, but ultimately is not very open to extension.
+        If we add more abilities for the player like wall jumps (possible with <code>onWall</code>),
+        or extra states like running where we need a different animation, we will struggle to keep
+        clean, functional code. For situations like this, it may be better to implement a
+        state machine, such as a Push Down Automata, or a Hierarchical State Machine,
+        or even both at the same time! State machines are discussed in detail in the excellent eBook
+        <a href="#resources">Game Programming Patterns</a>, a link to which can be found in the resources page of this site.
+        Additionally, a PDA with potential for hierarchical states is implemeted in this game engine
+        in the <a href="#docs/AI/StateMachineAI">StateMachineAI</a> class.
+    </p>
+    <p>
+        Now, in order to get this AI code to work with our game,
+        all we need to do is assign it to the player, and activate physics for our player:
+    </p>
+    <div class="code-block">
+    <div class="header">PlatformerPlayerController.ts</div>
+    <pre class="code-body"><code>
+    startScene(): void {
+        ...
+        // Add the player in the starting position
+        this.player = this.add.animatedSprite("player", "primary");
+        this.player.animation.play("IDLE");
+        this.player.position.set(3*16, 18*16);
+
+        // Add physics so the player can move
+        this.player.addPhysics();
+        this.player.addAI(PlayerController, {jumpSoundKey: "jump"});
+        ...
+    }
+    </code>
+    </pre>
+    </div>
+</div>

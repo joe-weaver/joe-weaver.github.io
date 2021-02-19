@@ -84,8 +84,11 @@ window.addEventListener("DOMContentLoaded", setPage);
 
 class Router {
     registeredRoutes = {
-        "#": loadDocumentationRoute,
+        "#": loadHomeRoute,
+        "#docs": loadDocumentationRoute,
         "#diagrams": loadDiagramsRoute,
+        "#guides": loadGuidesRoute,
+        "#demos": loadDemosRoute,
         "#resources": loadResourcesRoute,
     };
 
@@ -95,7 +98,7 @@ class Router {
 
     initializeInternalLinks(data, path){
         if(path === undefined){
-            path = "#/";
+            path = "#docs/";
         }
 
         for(let docItem of data){
@@ -120,7 +123,7 @@ class Router {
         if(this.internalLinks[name]){
             return this.internalLinks[name];
         } else {
-            return "#/";
+            return "#docs/";
         }
     }
 
@@ -150,6 +153,20 @@ window.router = new Router();
 /* ############################## */
 
 /* ########## ROUTES ########## */
+function loadHomeRoute(routeChanged, docPage){
+    // Get the sidebar
+    const sidebar = $("#sidebar");
+
+    // Build the sidebar
+    sidebar.empty();
+
+    const content = $("#content");
+
+    content.empty();
+
+    content.load("home/index.html");
+}
+
 function loadDocumentationRoute(routeChanged, docPage){
     console.log("Loading documentation route");
 
@@ -162,7 +179,7 @@ function loadDocumentationRoute(routeChanged, docPage){
         sidebar.empty();
         
         for(let docItem of window.docData){
-            constructSidebarItem(docItem, "/", sidebar);
+            constructSidebarItem(docItem, "docs/", sidebar);
         }
         
         $(".folder .folder-name").click(function(event){
@@ -194,8 +211,12 @@ function loadDocumentationRoute(routeChanged, docPage){
         const content = $("#content");
         content.empty();
 
+        const docContent = $(`<div id="docs"></div>`)
+
         // Populate the content with the new page data
-        constructDocContent(content, pageData.data);
+        constructDocContent(docContent, pageData.data);
+
+        content.append(docContent);
     }
     
 }
@@ -298,7 +319,6 @@ function constructClassDiagram(content, objs, width, height){
         let umlObj = null;
 
         if(obj.type === "note"){
-            console.log("making note");
             umlObj = makeUMLNote(obj.name, obj.content, {width: obj.width + "px", left: obj.position[0] + "px", top: obj.position[1] + "px"})
         } else if(obj.type === "box"){
             umlObj = makeUMLBox(obj.name, {width: obj.width + "px", height: obj.height + "px", left: obj.position[0] + "px", top: obj.position[1] + "px"})
@@ -558,7 +578,7 @@ function constructClassDiagram(content, objs, width, height){
         ctx.closePath();
         ctx.stroke();
 
-        ctx.font = "12px Roboto Mono";
+        ctx.font = "12px Source Code Pro";
         if(con.startAnnotation !== undefined){
             ctx.fillText(con.startAnnotation, startAn[0], startAn[1]);
         }
@@ -566,6 +586,118 @@ function constructClassDiagram(content, objs, width, height){
         if(con.endAnnotation !== undefined){
             ctx.fillText(con.endAnnotation, endAn[0], endAn[1]);
         }
+    }
+}
+
+/* ########## */
+function loadDemosRoute(routeChanged, docPage){
+    const demos = [
+        {
+            name: "Basic Setup",
+            link: "setup",
+            page: "setup.html"
+        },
+        {
+            name: "Platformer",
+            link: "platformer",
+            page: "platformer.html"
+        }
+    ];
+
+    if(routeChanged){
+        const sidebar = $('#sidebar');
+        sidebar.empty();
+
+        // Fill the sidebar with the list of demos
+        for(let demo of demos){
+            // Create a new file
+            let file = makeFile(demo.link, "demos/", demo.name);
+        
+            // Append it to the parent element
+            sidebar.append(file);
+        }
+    }
+
+    // Render the route
+    if(docPage.length === 0){
+        $("#content").html("Welcome to demos");
+    } else {
+        // Extract the demo info
+        let demoName = docPage[0];
+
+        let demo = null;
+
+        for(let d of demos){
+            if(d.link === demoName){
+                demo = d;
+            }
+        }
+
+        console.log(demo);
+        console.log(demo.page);
+
+        if(demo !== null){
+            $("#content").load("demos/" + demo.page);
+        } else {
+            content.html("No page exists");
+        }
+
+    }
+}
+
+/* ########## */
+function loadGuidesRoute(routeChanged, docPage){
+    const demos = [
+        {
+            name: "Basic Setup",
+            link: "setup",
+            page: "setup.html"
+        },
+        {
+            name: "Platformer",
+            link: "platformer",
+            page: "platformer.html"
+        }
+    ];
+
+    if(routeChanged){
+        const sidebar = $('#sidebar');
+        sidebar.empty();
+
+        // Fill the sidebar with the list of guides
+        for(let demo of demos){
+            // Create a new file
+            let file = makeFile(demo.link, "guides/", demo.name);
+        
+            // Append it to the parent element
+            sidebar.append(file);
+        }
+    }
+
+    // Render the route
+    if(docPage.length === 0){
+        $("#content").html("Welcome to Guides");
+    } else {
+        // Extract the demo info
+        let demoName = docPage[0];
+
+        let demo = null;
+
+        for(let d of demos){
+            if(d.link === demoName){
+                demo = d;
+            }
+        }
+
+        console.log(demo);
+        console.log(demo.page);
+
+        if(demo !== null){
+            $("#content").load("guides/" + demo.page);
+        } else {
+            content.html("No page exists");
+        }
+
     }
 }
 

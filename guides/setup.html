@@ -1,0 +1,112 @@
+<div id="guide">
+    <h1>Basic Setup</h1>
+    <p>
+        Welcome to Wolfie2D!
+        The purpose of this tutorial is to describe the setup of a new game using Wolfie2d.
+        After following this, you should know how to get the technology up and running,
+        and understand how to create a basic game.
+    </p>
+    <h3>Download and Installation</h3>
+    <hr>
+    <p>
+        Prior to beginning work on this game, it is recommended to download <a href="https://code.visualstudio.com/" target="_blank">Visual Studio Code</a>
+        or another similar text editor. Wolfie2D was developed with text editors in mind, and may not place nicely with an IDE like IntelliJ Idea.
+        Additionally, you need to download Google Chrome and the add-on Web Server for Chrome.
+        The files produced by Wolfie2D and the assets you include in your project will need to be served to the user,
+        rather than just opened as flat files.
+        Using Web Server for Chrome is highly recommended. Although you may be able to get python's http.server to work,
+        we found it was buggy during the development of Wolfie2D, and did not always update promptly (presumably due to caching).
+    </p>
+    <p>
+        Download the game engine from <a href="https://github.com/joe-weaver/GameEngine" target="_blank">https://github.com/joe-weaver/GameEngine</a>.
+        git clone, or extract the contents to a new folder. This will be your project folder.
+    </p>
+    <p>
+        Next, navigate to the root directory of the project either through the terminal in VS Code (recommended), or through the git bash.
+        Type <code>npm install</code>, and hit enter. This will install the necessary npm packages.
+    </p>
+    <p>
+        These installed packages are all for the purpose of creating a TypeScript environment and allowing for
+        the project to transpile after every save, speeding up the development experience. Check out
+        <a href="https://www.typescriptlang.org/docs/handbook/gulp.html" target="_blank">this tutorial from TypeScript</a>
+        to see how the setup was done.
+    </p>
+    <p>At this point, you should have everything you need installed.</p>
+    <h3>Project Structure and Transpilation</h3>
+    <hr>
+    <p>
+        Whenever you've updated your project's TypeScript code and want to view the changes to your game,
+        you'll need to transpile your project. Thankfully, Gulp (a package installed via npm) handles that for us.
+        Once Gulp is started, it will automatically transpile your code to a JavaScript file whenever you save your changes.
+        It is worth noting that if you modify the <code>index.html</code> file, you will need to run Gulp again to see your changes.
+    </p>
+    <p>
+        To run Gulp, simply type <code>gulp</code> into the terminal, and press enter.
+        After this, Gulp, will be running, and any changes you make will automatically update the served application.
+    </p>
+    <p>
+        Now that this is complete, you file structure should look something like this:
+    </p>
+    <div class="code-block"><pre class="code-body"><code>
+    [your-project-name]/
+        │
+        ├ dist/
+        │   ├ assets/  <span class="code-comment">&lt;- This is where you will put any project assets</span>
+        │   │   └ demo_assets/
+        │   │       └... [default assets included for the demo projects] ...
+        │   │
+        │   ├ bundle.js    <span class="code-comment">&lt;- This is your transpiled code</span>
+        │   └ index.html   <span class="code-comment">&lt;- This is your processed html file</span>
+        │
+        ├ node_modules/
+        │   ├ ... [we don't care what's in here] ...
+        │
+        ├ src/
+        │   ├ Wolfie2D/
+        │   │   └ ... [In here is all of the game engine code]
+        │   │
+        │   ├ default_scene.ts
+        │   ├ index.d.ts
+        │   ├ index.html
+        │   └ main.js      <span class="code-comment">&lt;- This is the entry point into the application</span>
+        │
+        ├ .gitignore
+        ├ gulpfile.ts  <span class="code-comment">&lt;- This tells gulp how to package the project</span>
+        ├ package-lock.json
+        ├ package.json
+        ├ readme.md
+        └ tsconfig.json
+    </code></pre></div>
+    <p>
+        When doing work on your game, you will create new code files in the <code>src</code> directory,
+        and add any assets, like sprites or music, to the <code>dist/assets</code> directory.
+    </p>
+    <h3>Serving your Game</h3>
+    <hr>
+    <p>
+        Games created with Wolfie2D must be served to a browser to be properly seen.
+        This can be done with a technology like Web Server for Chrome.
+        To start the server, simply navigate to Web Server for Chrome, choose the <code>dist</code>
+        folder of your project, then start the server. Now, if you navigate to <a href="http://127.0.0.1:8887" target="_blank">http://127.0.0.1:8887</a>,
+        you should be able to see the view created in <code>default_scene.ts</code>:
+    </p>
+    <img src="images/default_scene_img.png" alt="The game created by default_scene.ts"/>
+    <p>
+        By default, you should be able to move around with WASD.
+        You can look at the source code for this scene by viewing <code>default_scene.ts</code> in a text editor.
+        If you make changes to this scene and save, Gulp will transpile the code. If you then refresh your browser,
+        changes will automatically be reflected.
+    </p>
+    <h3>Final Thoughts</h3>
+    <hr>
+    <p>
+        Now you're all set to get started making games with Wolfie2D!
+    </p>
+    <p>
+        If you have any questions, you can refer to the <a href="#docs">documentation</a>, or the the FAQ page,
+        which will be updated over time.
+    </p>
+    <p>
+        For a guide on making a basic game with Wolfie2D, continue on to the <a href="#guides/platformer">platformer guide</a>.
+    </p>
+</div>
