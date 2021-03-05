@@ -657,6 +657,11 @@ function loadGuidesRoute(routeChanged, docPage){
             name: "Platformer",
             link: "platformer",
             page: "platformer.html"
+        },
+        {
+            name: "Tiled",
+            link: "tiled",
+            page: "tiled.html"
         }
     ];
 
